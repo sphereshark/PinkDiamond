@@ -35,7 +35,7 @@ body {
 
 /* ================= サイドバー ================= */
 .sidebar {
-    width: 90px;
+    width: 80px;
     background: #4f6a8d;
     display: flex;
     flex-direction: column;
@@ -51,12 +51,12 @@ body {
 
 .menu-btn {
     width: 100%;
-    height: 70px;
+    height: 60px;
     border: none;
     background-color: transparent;
     background-repeat: no-repeat;
     background-position: center 10px;
-    background-size: 36px;
+    background-size: 30px;
     cursor: pointer;
     transition: 0.2s;
     display: flex;
@@ -76,7 +76,7 @@ body {
 }
 
 .menu-label {
-    font-size: 9px;
+    font-size: 10px;
     color: white;
     pointer-events: none;
     width: 100%;
@@ -86,7 +86,7 @@ body {
 }
 
 /* ======== ここで画像指定 ======== */
-.pinkdlogo { background-image: url("res/PinkD_Logo.png"); background-size: 50px; background-position: center; }
+.pinkdlogo { background-image: url("res/PinkD_Logo.png"); background-size: 40px; background-position: center; }
 .pinknet   { background-image: url("res/PinkD_Net_Logo_gray.png"); }
 .combat    { background-image: url("res/Combat.png"); }
 .movement  { background-image: url("res/Movement.png"); }
@@ -109,7 +109,7 @@ body {
 .panel {
     background: #5e7796;
     border-radius: 10px;
-    padding: 20px;
+    padding: 12px;
     height: 100%; /* .main の高さに対して100% */
     color: white;
     position: relative;
@@ -125,7 +125,7 @@ body {
 .tabs > *:not(:last-child) { margin-right: 10px; } /* gapのフォールバック */
 
 .tab {
-    padding: 10px 20px;
+    padding: 8px 14px;
     border-radius: 10px;
     background: #3e4f63;
     color: white;
@@ -326,16 +326,16 @@ hr {
 .main-layout > *:not(:last-child) { margin-right: 20px; } /* gapのフォールバック */
 
 .description-panel {
-    width: 240px;
+    width: 200px;
     background: rgba(0,0,0,0.15);
     border-radius: 10px;
     flex-shrink: 0; /* 縮小させない */
     padding: 15px;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.6;
     overflow-y: auto;
 }
-.desc-title { font-weight: bold; font-size: 18px; margin-bottom: 10px; color: #ff5fb2; color: var(--accent-color); }
+.desc-title { font-weight: bold; font-size: 16px; margin-bottom: 8px; color: #ff5fb2; color: var(--accent-color); }
 .desc-body { opacity: 0.9; }
 
 /* --- pinknet.html から移植した UI スタイル --- */
@@ -383,7 +383,7 @@ hr {
 }
 .combat-btn {
     width: 100%; background: #6b87a8; border: none; border-radius: 10px; padding: 12px; color: white; cursor: pointer;
-    font-size: 13px; box-shadow: inset 0 -2px rgba(0,0,0,0.2); transition: 0.15s;
+    font-size: 12px; box-shadow: inset 0 -2px rgba(0,0,0,0.2); transition: 0.15s;
 }
 .combat-btn:hover { background: #7c99bb; }
 .combat-btn:active { transform: scale(0.97); }
