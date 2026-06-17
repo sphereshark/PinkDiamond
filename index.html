@@ -344,13 +344,39 @@ hr {
 .item-title { font-size: 16px; font-weight: bold; }
 .item-meta { opacity: 0.6; font-size: 12px; }
 .forum-bottom { display: flex; gap: 10px; margin-top: auto; }
+.forum-bottom { display: flex; margin-top: auto; }
+.forum-bottom > *:not(:last-child) { margin-right: 10px; } /* IE11 fallback for gap */
 .forum-input { flex: 1; background: #2f3f53; border: none; padding: 12px; border-radius: 8px; color: white; outline: none; }
 .forum-send { width: 50px; background: #ff5fb2; background: var(--accent-color); border: none; border-radius: 8px; cursor: pointer; color: white; font-size: 18px; }
 
 /* --- combat.html から移植した UI スタイル --- */
-.combat-grid { display: flex; gap: 20px; height: 100%; overflow-y: auto; padding-right: 5px; align-items: flex-start; }
+.combat-grid {
+    display: flex;
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 5px;
+    align-items: flex-start;
+    margin-left: -10px; /* IE11 fallback for gap */
+    margin-right: -10px; /* IE11 fallback for gap */
+}
 .combat-column { flex: 1; display: flex; flex-direction: column; gap: 15px; }
+.combat-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px; /* IE11 fallback for gap */
+    margin-right: 10px; /* IE11 fallback for gap */
+}
 .combat-card { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 8px; }
+.combat-card {
+    background: rgba(0,0,0,0.2);
+    border-radius: 12px;
+    padding: 8px;
+    margin-bottom: 15px; /* IE11 fallback for gap in column */
+}
+.combat-card:last-child {
+    margin-bottom: 0; /* Remove margin from last card in column */
+}
 .combat-btn {
     width: 100%; background: #6b87a8; border: none; border-radius: 10px; padding: 12px; color: white; cursor: pointer;
     font-size: 13px; box-shadow: inset 0 -2px rgba(0,0,0,0.2); transition: 0.15s;
@@ -455,7 +481,7 @@ body.white-theme .message-input { background: #eee; color: #333; }
                     <div id="tab-about" class="tab" onclick="showTab(event,'about')">詳細</div>
                 </div>
                 <!-- 各tabContentはflex:1とoverflow-y:autoを持つ -->
-                <div id="lang" class="tabContent">
+                <div id="lang" class="tabContent" style="display:flex;">
                     <div class="lang">
                         <button onclick="setLang('ja')" id="btn-ja">日本語</button>
                         <button onclick="setLang('en')" id="btn-en">English</button>
@@ -1220,7 +1246,6 @@ function renderModules(menuKey) {
     var order = texts[currentLang][menuKey + "_order"];
     var desc = texts[currentLang][menuKey + "_desc"];
     if (!order || !desc) return;
-    grid.style.height = "auto"; /* flex:1 で高さを管理するため */
 
     var itemsPerCol = Math.ceil(order.length / 4);
     for (var i = 0; i < 4; i++) {
