@@ -120,9 +120,9 @@ body {
 /* タブ */
 .tabs {
     display: flex;
-    gap: 10px;
     margin-bottom: 20px;
 }
+.tabs > *:not(:last-child) { margin-right: 10px; } /* gapのフォールバック */
 
 .tab {
     padding: 10px 20px;
@@ -149,6 +149,7 @@ body {
 }
 
 .lang button.active::before {
+    color: #ff5fb2;
     content: "● ";
     color: var(--accent-color);
 }
@@ -176,6 +177,7 @@ body {
     background: var(--accent-color);
     border: none;
     padding: 8px 14px;
+    margin-bottom: 5px;
     border-radius: 8px;
     color: white;
     margin-right: 10px;
@@ -195,6 +197,7 @@ body {
 .toggle {
     display: flex;
     align-items: center;
+    margin-bottom: 15px;
     margin-top: 20px;
 }
 
@@ -204,6 +207,7 @@ body {
     background: #888;
     border-radius: 20px;
     position: relative;
+    flex-shrink: 0;
     margin-right: 10px;
     cursor: pointer;
 }
@@ -318,8 +322,9 @@ hr {
 }
 
 /* --- モジュール説明パネル --- */
-.main-layout { display: flex; height: calc(100% - 60px); gap: 20px; }
-.main-layout { display: flex; flex: 1; height: auto; gap: 20px; } /* flex:1 で残りの高さを埋める */
+.main-layout { display: flex; flex: 1; height: auto; } /* flex:1 で残りの高さを埋める */
+.main-layout > *:not(:last-child) { margin-right: 20px; } /* gapのフォールバック */
+
 .description-panel {
     width: 240px;
     background: rgba(0,0,0,0.15);
@@ -335,15 +340,15 @@ hr {
 
 /* --- pinknet.html から移植した UI スタイル --- */
 .forum-header { background: #2f3f53; padding: 10px; border-radius: 8px; margin-bottom: 10px; font-size: 14px; }
-.subtabs { display: flex; background: var(--accent-color); border-radius: 6px; overflow: hidden; margin-bottom: 15px; }
+.subtabs { display: flex; background: #ff5fb2; background: var(--accent-color); border-radius: 6px; overflow: hidden; margin-bottom: 15px; }
 .subtabs div { padding: 8px 15px; font-size: 13px; cursor: pointer; transition: 0.2s; }
 .subtabs div:hover { background: rgba(0,0,0,0.1); }
-.subtabs .right { margin-left: auto; display: flex; gap: 5px; }
+.subtabs .right { margin-left: auto; display: flex; }
+.subtabs .right > div { margin-left: 5px; }
 .forum-list { flex: 1; overflow-y: auto; margin-bottom: 15px; }
 .forum-item { background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
 .item-title { font-size: 16px; font-weight: bold; }
 .item-meta { opacity: 0.6; font-size: 12px; }
-.forum-bottom { display: flex; gap: 10px; margin-top: auto; }
 .forum-bottom { display: flex; margin-top: auto; }
 .forum-bottom > *:not(:last-child) { margin-right: 10px; } /* IE11 fallback for gap */
 .forum-input { flex: 1; background: #2f3f53; border: none; padding: 12px; border-radius: 8px; color: white; outline: none; }
@@ -359,7 +364,6 @@ hr {
     margin-left: -10px; /* IE11 fallback for gap */
     margin-right: -10px; /* IE11 fallback for gap */
 }
-.combat-column { flex: 1; display: flex; flex-direction: column; gap: 15px; }
 .combat-column {
     flex: 1;
     display: flex;
@@ -391,8 +395,8 @@ hr {
     left: 20px;
     right: 20px;
     display: flex;
-    gap: 10px;
 }
+.input-bar > *:not(:last-child) { margin-right: 10px; }
 .message-input {
     flex: 1;
     background: #2f3f53;
@@ -418,6 +422,7 @@ hr {
 }
 .menu-content {
     display: none; /* デフォルトで非表示 */
+    height: 100%;
     flex: 1; /* 親要素の残りの高さを埋める */
     flex-direction: column; /* 子要素を縦に並べる */
     overflow: hidden; /* 内部スクロールのために親のオーバーフローを隠す */
@@ -428,7 +433,8 @@ hr {
 .btn-send { background-image: url("res/Send.png"); }
 
 /* --- プレイヤー情報スタイル --- */
-.player-info-row { display: flex; gap: 40px; padding: 10px 0; }
+.player-info-row { display: flex; padding: 10px 0; }
+.player-info-row > div { margin-right: 40px; }
 .player-info-item { display: flex; flex-direction: column; }
 .player-info-label { font-size: 12px; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
 .player-info-value { font-size: 18px; font-weight: bold; }
@@ -481,7 +487,7 @@ body.white-theme .message-input { background: #eee; color: #333; }
                     <div id="tab-about" class="tab" onclick="showTab(event,'about')">詳細</div>
                 </div>
                 <!-- 各tabContentはflex:1とoverflow-y:autoを持つ -->
-                <div id="lang" class="tabContent" style="display:flex;">
+                <div id="lang" class="tabContent" style="display:block;">
                     <div class="lang">
                         <button onclick="setLang('ja')" id="btn-ja">日本語</button>
                         <button onclick="setLang('en')" id="btn-en">English</button>
@@ -523,15 +529,15 @@ body.white-theme .message-input { background: #eee; color: #333; }
 
                     <hr>
 
-                    <div style="display:flex;align-items:center;gap:15px;">
+                    <div style="display:flex;align-items:center;">
                         <button class="btn">プレビューボタン</button>
-                        <div class="switch active" onclick="toggleSwitch(this)">
+                        <div class="switch active" onclick="toggleSwitch(this)" style="margin-left: 15px;">
                             <div class="knob"></div>
                         </div>
-                        <span>プレビュートグル</span>
+                        <span style="margin-left: 15px;">プレビュートグル</span>
                     </div>
 
-                    <div style="margin-top:20px; display:flex; align-items:center; gap:15px;">
+                    <div style="margin-top:20px; display:flex; align-items:center;">
                         <div class="slider-wrap">
                             <input type="range" min="0.0" max="1.0" step="0.1" value="0.5" oninput="updateSlider(this)">
                             <div class="slider-value" id="sliderValue">0.5</div>
@@ -1194,7 +1200,8 @@ function showTab(e, name) {
     for (var i = 0; i < tabContents.length; i++) {
         tabContents[i].style.display = "none";
     }
-    document.getElementById(name).style.display = "flex"; // tabContentもflexにする
+    // WiiUブラウザでは縦並びを安定させるため block に変更
+    document.getElementById(name).style.display = "block"; 
     var tabs = document.querySelectorAll(".tab");
     for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove("active");
     e.target.classList.add("active");
