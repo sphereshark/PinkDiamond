@@ -69,7 +69,6 @@ body {
 }
 
 .menu-btn.active {
-    background-color: #ff5fb2;
     background-color: var(--accent-color);
 }
 
@@ -129,7 +128,6 @@ body {
 }
 
 .tab.active {
-    background-color: #ff5fb2;
     background: var(--accent-color);
 }
 
@@ -168,7 +166,6 @@ body {
 
 /* ボタン */
 .btn {
-    background-color: #ff5fb2;
     background: var(--accent-color);
     border: none;
     padding: 8px 14px;
@@ -216,7 +213,6 @@ body {
 }
 
 .switch.active {
-    background-color: #ff5fb2;
     background: var(--accent-color);
 }
 
@@ -254,7 +250,6 @@ body {
 .select-btn {
     width: 30px;
     height: 30px;
-    background-color: #ff5fb2;
     background: var(--accent-color);
     border-radius: 8px;
     position: relative;
@@ -289,7 +284,6 @@ body {
     appearance: none;
     width: 20px;
     height: 20px;
-    background-color: #ff5fb2;
     background: var(--accent-color);
     border-radius: 50%;
     cursor: pointer;
@@ -300,7 +294,6 @@ body {
     top: -25px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #ff5fb2;
     background: var(--accent-color);
     padding: 3px 8px;
     border-radius: 10px;
@@ -324,7 +317,7 @@ hr {
     line-height: 1.6;
     overflow-y: auto;
 }
-.desc-title { font-weight: bold; font-size: 18px; margin-bottom: 10px; color: #ff5fb2; color: var(--accent-color); }
+.desc-title { font-weight: bold; font-size: 18px; margin-bottom: 10px; color: var(--accent-color); }
 .desc-body { opacity: 0.9; }
 
 /* --- pinknet.html から移植した UI スタイル --- */
@@ -339,7 +332,7 @@ hr {
 .item-meta { opacity: 0.6; font-size: 12px; }
 .forum-bottom { display: flex; gap: 10px; margin-top: auto; }
 .forum-input { flex: 1; background: #2f3f53; border: none; padding: 12px; border-radius: 8px; color: white; outline: none; }
-.forum-send { width: 50px; background: #ff5fb2; background: var(--accent-color); border: none; border-radius: 8px; cursor: pointer; color: white; font-size: 18px; }
+.forum-send { width: 50px; background: var(--accent-color); border: none; border-radius: 8px; cursor: pointer; color: white; font-size: 18px; }
 
 /* --- combat.html から移植した UI スタイル --- */
 .combat-grid { display: flex; gap: 20px; height: 100%; overflow-y: auto; padding-right: 5px; align-items: flex-start; }
@@ -376,7 +369,6 @@ hr {
     height: 45px;
     border: none;
     border-radius: 10px;
-    background-color: #ff5fb2;
     background: var(--accent-color);
     cursor: pointer;
     transition: 0.15s;
@@ -623,11 +615,11 @@ body.white-theme .message-input { background: #eee; color: #333; }
 
 <script>
 /* ===== 言語 ===== */
-var currentLang = "ja";
-var currentMenu = "settings";
-var currentModuleKey = "";
+let currentLang = "ja";
+let currentMenu = "settings";
+let currentModuleKey = "";
 
-var texts = {
+const texts = {
     ja: { 
         subtitle: "Pink Diamond のカスタマイズ",
         tabs: {
@@ -1107,20 +1099,20 @@ function setLang(lang) {
     currentLang = lang;
     
     // サイドバーのラベル更新
-    for (var key in texts[lang].sidebar) {
-        var el = document.getElementById("label-" + key);
+    for (const key in texts[lang].sidebar) {
+        const el = document.getElementById("label-" + key);
         if (el) el.innerText = texts[lang].sidebar[key];
     }
 
     // タブのラベル更新
-    for (var key in texts[lang].tabs) {
-        var el = document.getElementById("tab-" + key);
+    for (const key in texts[lang].tabs) {
+        const el = document.getElementById("tab-" + key);
         if (el) el.innerText = texts[lang].tabs[key];
     }
 
     // その他タブのラベル更新
-    for (var key in texts[lang].seotr) {
-        var el = document.getElementById("label-" + key);
+    for (const key in texts[lang].seotr) {
+        const el = document.getElementById("label-" + key);
         if (el) el.innerText = texts[lang].seotr[key];
     }
 
@@ -1150,28 +1142,24 @@ function setLang(lang) {
 
 /* ===== タブ ===== */
 function showTab(e, name) {
-    var contents = document.querySelectorAll(".tabContent");
-    for (var i = 0; i < contents.length; i++) contents[i].style.display = "none";
+    document.querySelectorAll(".tabContent").forEach(el => el.style.display = "none");
     document.getElementById(name).style.display = "block";
 
-    var tabs = document.querySelectorAll(".tab");
-    for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove("active");
+    document.querySelectorAll(".tab").forEach(el => el.classList.remove("active"));
     e.target.classList.add("active");
 }
 
 /* ===== メニュー ===== */
 function selectMenu(btn, key) {
     currentMenu = key;
-    var btns = document.querySelectorAll(".menu-btn");
-    for (var i = 0; i < btns.length; i++) btns[i].classList.remove("active");
+    document.querySelectorAll(".menu-btn").forEach(el => el.classList.remove("active"));
     btn.classList.add("active");
     updateTitle();
 
     // コンテンツの切り替え
-    var menuContents = document.querySelectorAll(".menu-content");
-    for (var i = 0; i < menuContents.length; i++) menuContents[i].style.display = "none";
-    var subtitle = document.getElementById("subtitle");
-    var descPanel = document.getElementById("module-desc");
+    document.querySelectorAll(".menu-content").forEach(el => el.style.display = "none");
+    const subtitle = document.getElementById("subtitle");
+    const descPanel = document.getElementById("module-desc");
 
     if (key === 'pinknet') {
         document.getElementById("content-pinknet").style.display = "flex";
@@ -1185,7 +1173,7 @@ function selectMenu(btn, key) {
         document.getElementById("content-message").style.display = "block";
         subtitle.style.display = "none";
         descPanel.style.display = "none";
-    } else if (['combat', 'movement', 'render', 'item', 'world', 'other', 'patch', 'server'].indexOf(key) !== -1) {
+    } else if (['combat', 'movement', 'render', 'item', 'world', 'other', 'patch', 'server'].includes(key)) {
         document.getElementById("content-modules").style.display = "block";
         renderModules(key);
         subtitle.style.display = "none";
@@ -1198,34 +1186,33 @@ function selectMenu(btn, key) {
 }
 
 function renderModules(menuKey) {
-    var grid = document.getElementById("module-grid");
+    const grid = document.getElementById("module-grid");
     if (!grid) return;
     grid.innerHTML = "";
 
-    var order = texts[currentLang][menuKey + "_order"];
-    var desc = texts[currentLang][menuKey + "_desc"];
+    const order = texts[currentLang][menuKey + "_order"];
+    const desc = texts[currentLang][menuKey + "_desc"];
     if (!order || !desc) return;
 
-    var itemsPerCol = Math.ceil(order.length / 4);
-    for (var i = 0; i < 4; i++) {
-        var col = document.createElement("div");
+    const itemsPerCol = Math.ceil(order.length / 4);
+    for (let i = 0; i < 4; i++) {
+        const col = document.createElement("div");
         col.className = "combat-column";
-        var chunk = order.slice(i * itemsPerCol, (i + 1) * itemsPerCol);
-        for (var j = 0; j < chunk.length; j++) {
-            var key = chunk[j];
-            var mod = desc[key] || { name: key };
-            var card = document.createElement("div");
+        const chunk = order.slice(i * itemsPerCol, (i + 1) * itemsPerCol);
+        chunk.forEach(key => {
+            const module = desc[key] || { name: key };
+            const card = document.createElement("div");
             card.className = "combat-card";
-            card.innerHTML = '<button class="combat-btn" onclick="showModuleDesc(\'' + key + '\')">' + mod.name + '</button>';
+            card.innerHTML = `<button class="combat-btn" onclick="showModuleDesc('${key}')">${module.name}</button>`;
             col.appendChild(card);
-        }
+        });
         grid.appendChild(col);
     }
 }
 
 function showModuleDesc(moduleKey) {
     currentModuleKey = moduleKey;
-    var info = texts[currentLang][currentMenu + "_desc"][moduleKey] || { name: moduleKey, text: "No description available." };
+    const info = texts[currentLang][currentMenu + "_desc"][moduleKey] || { name: moduleKey, text: "No description available." };
     document.getElementById("desc-title").innerText = info.name;
     document.getElementById("desc-body").innerText = info.text;
 }
@@ -1240,16 +1227,16 @@ function toggleSwitch(el) {
 }
 
 function updateSlider(slider) {
-    var value = slider.value;
-    var label = document.getElementById("sliderValue");
+    const value = slider.value;
+    const label = document.getElementById("sliderValue");
     label.innerText = value;
     label.style.left = (value * 100) + "%";
 }
 
 function toggleBaseTheme() {
-    var el = document.getElementById("baseTheme");
-    var isDark = el.innerText === "Dark";
-    var newTheme = isDark ? "White" : "Dark";
+    const el = document.getElementById("baseTheme");
+    const isDark = el.innerText === "Dark";
+    const newTheme = isDark ? "White" : "Dark";
     el.innerText = newTheme;
     
     if (newTheme === "White") {
@@ -1259,19 +1246,16 @@ function toggleBaseTheme() {
     }
 }
 
-var accentColors = ["Pink", "Blue", "Green", "Purple", "Orange", "Red", "Yellow", "Cyan", "Rainbow", "Custom"];
-var currentAccentIndex = 0;
+const accentColors = ["Pink", "Blue", "Green", "Purple", "Orange", "Red", "Yellow", "Cyan", "Rainbow", "Custom"];
+let currentAccentIndex = 0;
 
 function cycleAccentColor() {
     currentAccentIndex = (currentAccentIndex + 1) % accentColors.length;
-    var color = accentColors[currentAccentIndex];
+    const color = accentColors[currentAccentIndex];
     document.getElementById("accentColor").innerText = color;
     
     // 既存のアクセントクラスをすべて削除
-    for (var i = 0; i < accentColors.length; i++) {
-        document.body.classList.remove("accent-" + accentColors[i].toLowerCase());
-    }
-
+    document.body.classList.remove(...accentColors.map(c => "accent-" + c.toLowerCase()));
     // 新しいクラスを追加 (Custom以外)
     if (color !== "Custom") {
         document.body.classList.add("accent-" + color.toLowerCase());
